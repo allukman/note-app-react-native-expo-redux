@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Context as BlogContext } from "../context/BlogContext";
-import BlogPostForm from "../components/blog-post-form/BlogPostForm";
+import NotePostForm from "../components/note-post-form/NotePostForm";
 
 const CreateScreen = ({ navigation }) => {
-  const { addBlogPost } = useContext(BlogContext);
+  const { addNote } = useContext(BlogContext);
 
   return (
-    <BlogPostForm
-      onSubmit={(title, content) => {
-        addBlogPost(title, content, () => navigation.navigate("Index"));
+    <NotePostForm
+      onSubmit={(title, content, backgroundColor) => {
+        addNote(title, content, backgroundColor,() => navigation.navigate("Index"));
       }}
     />
   );

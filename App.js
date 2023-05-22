@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity } from "react-native"
+import { TouchableOpacity } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -16,37 +16,39 @@ import { Feather, EvilIcons } from "@expo/vector-icons";
 const Stack = createStackNavigator();
 
 export default function App() {
-  return(
+  return (
     <Provider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen 
-            name="Index" 
+          <Stack.Screen
+            name="Index"
             component={IndexScreen}
-            options={({navigation}) => ({
+            options={() => ({
               headerTitle: "List Note",
-              headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.navigate("Create")}>
-                  <Feather name="plus" size={30}/>
-                </TouchableOpacity>
-              )
-            })}/>
-            <Stack.Screen 
-            name="Detail" 
+            })}
+          />
+          <Stack.Screen
+            name="Detail"
             component={DetailScreen}
-            options={({route, navigation}) => ({
+            options={({ route, navigation }) => ({
+              headerTitle: route.params.title,
               headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.navigate("Edit", { id: route.params.id})}>
-                  <EvilIcons name="pencil" size={30}/>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Edit", { id: route.params.id })
+                  }
+                >
+                  <EvilIcons name="pencil" size={30} />
                 </TouchableOpacity>
-              )
-            })}/>
-          <Stack.Screen name="Create" component={CreateScreen}/>
-          <Stack.Screen name="Edit" component={EditScreen}/>
+              ),
+            })}
+          />
+          <Stack.Screen name="Create" component={CreateScreen} />
+          <Stack.Screen name="Edit" component={EditScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
-  )
+  );
 }
 
 // const navigator = createStackNavigator(

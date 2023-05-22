@@ -10,13 +10,13 @@ const DetailScreen = ( { route } ) => {
 
     console.log(title)
 
-    const blogPost = state.find((blogPost) => blogPost.id === id)
+    const note = state.find((note) => note.id === id)
 
 
     return (
         <View>
-            <Text>{blogPost.title}</Text>
-            <Text>{blogPost.content}</Text>
+            <Text>{note.title}</Text>
+            <Text>{note.content}</Text>
         </View>
     )
 }
