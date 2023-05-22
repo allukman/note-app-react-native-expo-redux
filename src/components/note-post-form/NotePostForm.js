@@ -12,38 +12,44 @@ import NoteBackground from "../note-background-color-selector/NoteBackground";
 const NotePostForm = ({ onSubmit, initialValues }) => {
   const [title, setTitle] = useState(initialValues.title);
   const [content, setContent] = useState(initialValues.content);
-  const [selectedItem, setSelectedItem] = useState(initialValues.backgroundColor);
+  const [selectedItem, setSelectedItem] = useState(
+    initialValues.backgroundColor
+  );
 
   const handleItemSelected = (item) => {
     setSelectedItem(item); // Mengubah state item yang dipilih
   };
 
   const onPressButton = () => {
-    onSubmit(title, content, selectedItem)
-  }
+    onSubmit(title, content, selectedItem);
+  };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Title : </Text>
-      <TextInput
-        style={[styles.input, { height: 40 }]}
-        value={title}
-        onChangeText={(text) => setTitle(text)}
-      />
-      <Text style={styles.label}>Content : </Text>
-      <TextInput
-        style={[styles.input, { height: 100 }]}
-        value={content}
-        multiline={true}
-        numberOfLines={4}
-        textAlignVertical="top"
-        onChangeText={(text) => setContent(text)}
-      />
-      <NoteBackground onItemSelected={handleItemSelected}/>
-      <TouchableOpacity style={styles.button} onPress={onPressButton}>
-        <Text style={styles.buttonText}>Save</Text>
-      </TouchableOpacity>
-      {/* <Button title="Save" onPress={() => onSubmit(title, content, "lightblue")} /> */}
+    <View style={{ flex: 1, backgroundColor: initialValues.backgroundColor, justifyContent: 'space-between'}}>
+      <View style={styles.containerTop}>
+        <TextInput
+          placeholder="Title"
+          style={styles.inputTitle}
+          value={title}
+          onChangeText={(text) => setTitle(text)}
+        />
+
+        <TextInput
+          placeholder="Description"
+          multiline={true}
+          numberOfLines={4}
+          textAlignVertical="top"
+          value={content}
+          onChangeText={setContent}
+          style={styles.inputDescription}
+        />
+      </View>
+      <View style={styles.containerBot}>
+        <NoteBackground onItemSelected={handleItemSelected} />
+        <TouchableOpacity style={styles.button} onPress={onPressButton}>
+          <Text style={styles.buttonText}>Save</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -52,44 +58,54 @@ NotePostForm.defaultProps = {
   initialValues: {
     title: "",
     content: "",
-    backgroundColor: "lightblue",
+    backgroundColor: "white",
   },
 };
 
 export default NotePostForm;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 8,
-    marginHorizontal: 8,
+  containerTop: {
+    margin: 16,
+  },
+  containerBot: {
+    marginBottom: 16
+  },
+  inputTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 24,
+    marginRight: 24,
+  },
+  inputDescription: {
+    fontSize: 18,
+    color: "#666666",
+    marginRight: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 24,
+    marginRight: 24,
+  },
+  description: {
+    fontSize: 18,
+    color: "#666666",
+    marginRight: 16,
   },
   button: {
-    backgroundColor: "green",
+    backgroundColor: "blue",
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 24,
     marginTop: 16,
+    marginHorizontal: 16,
   },
+
   buttonText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
-  },
-  label: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  input: {
-    width: "100%",
-    height: 100,
-    padding: 10,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    marginBottom: 8,
   },
 });
