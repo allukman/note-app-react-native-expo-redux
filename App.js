@@ -7,7 +7,8 @@ import DetailScreen from "./src/screens/DetailScreen";
 import CreateScreen from "./src/screens/CreateScreen";
 import EditScreen from "./src/screens/EditScreen";
 
-import { Provider } from "./src/context/BlogContext";
+import { Provider as BlogProvider } from "./src/context/BlogContext";
+import { Provider as ImageProvide } from "./src/context/ImageContext";
 
 const navigator = createStackNavigator(
   {
@@ -28,8 +29,8 @@ const App = createAppContainer(navigator);
 
 export default () => {
   return (
-    <Provider>
+    <BlogProvider>
       <App />
-    </Provider>
+    </BlogProvider>
   );
 };
