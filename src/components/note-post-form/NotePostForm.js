@@ -4,7 +4,6 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   TouchableOpacity,
 } from "react-native";
 
@@ -20,10 +19,6 @@ const NotePostForm = ({ onSubmit, initialValues }) => {
   };
 
   const onPressButton = () => {
-    console.log(title);
-    console.log(content);
-    console.log(selectedItem);
-
     onSubmit(title, content, selectedItem)
   }
 
@@ -46,7 +41,7 @@ const NotePostForm = ({ onSubmit, initialValues }) => {
       />
       <NoteBackground onItemSelected={handleItemSelected}/>
       <TouchableOpacity style={styles.button} onPress={onPressButton}>
-        <Text style={styles.buttonText}>Tekan Saya</Text>
+        <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
       {/* <Button title="Save" onPress={() => onSubmit(title, content, "lightblue")} /> */}
     </View>

@@ -1,11 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import {
-  View,
-  FlatList,
-  TouchableOpacity
-} from "react-native";
+import { View, FlatList, TouchableOpacity } from "react-native";
 import { Context } from "../context/BlogContext";
-import NotedItem from "../components/noted-item/NotedItem"
+import NotedItem from "../components/noted-item/NotedItem";
 
 import { Feather } from "@expo/vector-icons";
 
@@ -15,7 +11,7 @@ const IndexScreen = ({ navigation }) => {
   useEffect(() => {
     getNotes();
 
-    const listener = navigation.addListener('focus', ()=> {
+    const listener = navigation.addListener("focus", () => {
       getNotes();
     });
 
@@ -27,7 +23,7 @@ const IndexScreen = ({ navigation }) => {
   return (
     <View>
       <FlatList
-        style={{marginBottom: 16}}
+        style={{ marginBottom: 16 }}
         data={state}
         keyExtractor={(note) => note.id}
         renderItem={({ item }) => (
@@ -39,7 +35,7 @@ const IndexScreen = ({ navigation }) => {
         )}
       />
 
-<TouchableOpacity
+      <TouchableOpacity
         style={{
           position: "absolute",
           bottom: 30,
@@ -49,10 +45,10 @@ const IndexScreen = ({ navigation }) => {
           padding: 16,
         }}
         onPress={() => {
-          navigation.navigate("Create")
+          navigation.navigate("Create");
         }}
       >
-        <Feather name="plus" size={30} color="white"/>
+        <Feather name="plus" size={30} color="white" />
       </TouchableOpacity>
     </View>
   );

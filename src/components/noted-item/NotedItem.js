@@ -7,10 +7,10 @@ const NotedItem = ({ item, navigation, deleteNote }) => {
     <TouchableOpacity
       style={{ flex: 1 }}
       onPress={() =>
-        navigation.navigate("Detail", { id: item.id, title: item.title })
+        navigation.navigate("Detail", { id: item.id, title: item.title, backgroundColor: item.backgroundColor })
       }
     >
-      <View style={styles.row}>
+      <View>
         <View style={[styles.card, {backgroundColor: item.backgroundColor}]}>
           <View style={styles.container}>
             <Text style={styles.title} numberOfLines={1}>{item.title}</Text>
