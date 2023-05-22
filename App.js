@@ -1,36 +1,74 @@
 import React from "react";
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
+import { TouchableOpacity } from "react-native"
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import IndexScreen from "./src/screens/IndexScreen";
 import DetailScreen from "./src/screens/DetailScreen";
 import CreateScreen from "./src/screens/CreateScreen";
 import EditScreen from "./src/screens/EditScreen";
 
-import { Provider as BlogProvider } from "./src/context/BlogContext";
-import { Provider as ImageProvide } from "./src/context/ImageContext";
+import { Provider } from "./src/context/BlogContext";
 
-const navigator = createStackNavigator(
-  {
-    Index: IndexScreen,
-    Detail: DetailScreen,
-    Create: CreateScreen,
-    Edit: EditScreen
-  },
-  {
-    initialRouteName: "Index",
-    defaultNavigationOptions: {
-      title: "Blogs",
-    },
-  }
-);
+import { Feather, EvilIcons } from "@expo/vector-icons";
 
-const App = createAppContainer(navigator);
+const Stack = createStackNavigator();
 
-export default () => {
-  return (
-    <BlogProvider>
-      <App />
-    </BlogProvider>
-  );
-};
+export default function App() {
+  return(
+    <Provider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerTitle: "blogs" }}>
+          <Stack.Screen 
+            name="Index" 
+            component={IndexScreen}
+            options={({navigation}) => ({
+              headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate("Create")}>
+                  <Feather name="plus" size={30}/>
+                </TouchableOpacity>
+              )
+            })}/>
+            <Stack.Screen 
+            name="Detail" 
+            component={DetailScreen}
+            options={({route, navigation}) => ({
+              headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate("Edit", { id: route.params.id })}>
+                  <EvilIcons name="pencil" size={30}/>
+                </TouchableOpacity>
+              )
+            })}/>
+          <Stack.Screen name="Create" component={CreateScreen}/>
+          <Stack.Screen name="Edit" component={EditScreen}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  )
+}
+
+// const navigator = createStackNavigator(
+//   {
+//     Index: IndexScreen,
+//     Detail: DetailScreen,
+//     Create: CreateScreen,
+//     Edit: EditScreen
+//   },
+//   {
+//     initialRouteName: "Index",
+//     defaultNavigationOptions: {
+//       title: "Blogs",
+//     },
+//   }
+// );
+
+// const App = createAppContainer(navigator);
+
+// export default () => {
+//   return (
+//     <BlogProvider>
+//       <App />
+//     </BlogProvider>
+//   );
+// };

@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import { Context } from "../context/BlogContext";
@@ -16,14 +15,14 @@ const IndexScreen = ({ navigation }) => {
   useEffect(() => {
     getBlogPost();
 
-    const listener = navigation.addListener('didFocus', ()=> {
+    const listener = navigation.addListener('focus', ()=> {
       getBlogPost();
     });
 
     return () => {
       listener.remove();
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <View>
@@ -47,16 +46,6 @@ const IndexScreen = ({ navigation }) => {
     </View>
   );
 };
-
-IndexScreen.navigationOptions = ({ navigation }) => {
-  return {
-    headerRight: () => (
-      <TouchableOpacity onPress={() => navigation.navigate('Create')}>
-        <Feather name="plus" size={30} />
-      </TouchableOpacity>
-    ),
-  }
-}
 
 const styles = StyleSheet.create({
   row: {

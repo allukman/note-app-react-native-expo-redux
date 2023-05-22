@@ -3,9 +3,10 @@ import { StyleSheet } from "react-native";
 import { Context as BlogContext } from "../context/BlogContext";
 import BlogPostForm from "../components/BlogPostForm";
 
-const EditScreen = ({ navigation }) => {
+const EditScreen = ({ navigation, route }) => {
+  const id = route.params.id;
   const { state, editBlogPost } = useContext(BlogContext);
-  const id = navigation.getParam("id");
+  
   const blogPost = state.find((blogPost) => blogPost.id === id);
 
   return (
