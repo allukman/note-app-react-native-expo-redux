@@ -19,11 +19,12 @@ export default function App() {
   return(
     <Provider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerTitle: "blogs" }}>
+        <Stack.Navigator>
           <Stack.Screen 
             name="Index" 
             component={IndexScreen}
             options={({navigation}) => ({
+              headerTitle: "List Note",
               headerRight: () => (
                 <TouchableOpacity onPress={() => navigation.navigate("Create")}>
                   <Feather name="plus" size={30}/>
@@ -35,7 +36,7 @@ export default function App() {
             component={DetailScreen}
             options={({route, navigation}) => ({
               headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.navigate("Edit", { id: route.params.id })}>
+                <TouchableOpacity onPress={() => navigation.navigate("Edit", { id: route.params.id})}>
                   <EvilIcons name="pencil" size={30}/>
                 </TouchableOpacity>
               )

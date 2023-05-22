@@ -6,6 +6,9 @@ const DetailScreen = ( { route } ) => {
     const { state } = useContext(BlogContext);
 
     const id = route.params.id
+    const title = route.params.title
+
+    console.log(title)
 
     const blogPost = state.find((blogPost) => blogPost.id === id)
 

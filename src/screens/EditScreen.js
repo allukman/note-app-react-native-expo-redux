@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Context as BlogContext } from "../context/BlogContext";
-import BlogPostForm from "../components/BlogPostForm";
+import BlogPostForm from "../components/blog-post-form/BlogPostForm";
 
 const EditScreen = ({ navigation, route }) => {
   const id = route.params.id;
