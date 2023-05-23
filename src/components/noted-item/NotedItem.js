@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 const NotedItem = ({ item, navigation, deleteNote }) => {
+
   return (
     <TouchableOpacity
       style={{ flex: 1 }}
@@ -52,7 +53,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: "bold",
     marginBottom: 8,
     marginRight: 24,
   },
