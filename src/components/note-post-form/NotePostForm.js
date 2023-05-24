@@ -26,10 +26,8 @@ const NotePostForm = ({ onSubmit, initialValues }) => {
     return null;
   }
 
-  // TEST
-
   const handleItemSelected = (item) => {
-    setSelectedItem(item); // Mengubah state item yang dipilih
+    setSelectedItem(item);
   };
 
   const onPressButton = () => {
