@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import NoteBackground from "../note-background-color-selector/NoteBackground";
+import { useFonts } from "expo-font";
 
 const NotePostForm = ({ onSubmit, initialValues }) => {
   const [title, setTitle] = useState(initialValues.title);
@@ -15,6 +16,15 @@ const NotePostForm = ({ onSubmit, initialValues }) => {
   const [selectedItem, setSelectedItem] = useState(
     initialValues.backgroundColor
   );
+
+  const [fontsLoaded] = useFonts({
+    'Nunito-Regular': require('../../../assets/fonts/Nunito-Regular.ttf'),
+    'Nunito-Bold': require('../../../assets/fonts/Nunito-Bold.ttf')
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const handleItemSelected = (item) => {
     setSelectedItem(item); // Mengubah state item yang dipilih
@@ -73,17 +83,18 @@ const styles = StyleSheet.create({
   },
   inputTitle: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontFamily: "Nunito-Bold",
     marginBottom: 24,
     marginRight: 24,
   },
   inputDescription: {
     fontSize: 18,
     color: "#666666",
+    fontFamily: "Nunito-Regular",
     marginRight: 16,
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: "bold",
     marginBottom: 24,
     marginRight: 24,
