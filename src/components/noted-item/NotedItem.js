@@ -1,9 +1,27 @@
-import React, { useEffect } from "react";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { TouchableOpacity, View, Text, StyleSheet, Alert } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 const NotedItem = ({ item, navigation, deleteNote }) => {
-
+  const handleDelete = () => {
+    Alert.alert(
+      "Confirmation",
+      "Are you sure you want to delete this?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => {
+            deleteNote(item.id)
+          }
+        }
+      ]
+    );
+  }
   return (
     <TouchableOpacity
       style={{ flex: 1 }}
@@ -20,7 +38,7 @@ const NotedItem = ({ item, navigation, deleteNote }) => {
 
           <TouchableOpacity
             style={styles.trashButton}
-            onPress={() => deleteNote(item.id)}
+            onPress={handleDelete}
           >
             <FontAwesome5 style={styles.icon} name="trash" />
           </TouchableOpacity>

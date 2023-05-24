@@ -1,65 +1,49 @@
-import React, { useContext } from "react";
-import { StyleSheet, View, Text, TextInput } from "react-native";
-import { Context as BlogContext } from "../context/BlogContext";
+import React from "react";
 import NotePostForm from "../components/note-post-form/NotePostForm";
+import { Alert } from 'react-native'
+
+import { useSelector, useDispatch } from "react-redux";
+import { updateNote } from "../redux/features/note/noteSlice";
 
 const EditScreen = ({ navigation, route }) => {
-  const id = route.params.id;
-  const { state, editNote } = useContext(BlogContext);
+  const handleEdit = (id, title, content, backgroundColor) => {
+    Alert.alert("Confirmation", "Are you sure you want to edit this?", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Save",
+        style: "destructive",
+        onPress: () => {
+          dispatch(
+            updateNote(id, title, content, backgroundColor, () =>
+              navigation.navigate("Detail", { id, title, backgroundColor })
+            )
+          );
+        },
+      },
+    ]);
+  };
 
-  const note = state.find((note) => note.id === id);
+  const dispatch = useDispatch();
+  const notes = useSelector((state) => state.note);
+
+  const id = route.params.id;
+  const note = notes.find((note) => note.id === id);
 
   return (
     <NotePostForm
-      initialValues={{ title: note.title, content: note.content, backgroundColor: note.backgroundColor }}
+      initialValues={{
+        title: note.title,
+        content: note.content,
+        backgroundColor: note.backgroundColor,
+      }}
       onSubmit={(title, content, backgroundColor) => {
-        editNote(id, title, content, backgroundColor, () => navigation.pop());
+        handleEdit(id, title, content, backgroundColor);
       }}
     />
   );
-
-  // return (
-  //   <View style={{ flex: 1, backgroundColor: note.backgroundColor }}>
-  //     <View style={styles.container}>
-  //       <TextInput placeholder="Title" style={styles.inputTitle} />
-  //       <TextInput
-  //         placeholder="Description"
-  //         multiline={true}
-  //         numberOfLines={4}
-  //         textAlignVertical="top"
-  //         style={styles.inputDescription}
-  //       />
-  //     </View>
-  //   </View>
-  // );
 };
 
 export default EditScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    margin: 16,
-  },
-  inputTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 24,
-    marginRight: 24,
-  },
-  inputDescription: {
-    fontSize: 18,
-    color: "#666666",
-    marginRight: 16,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 24,
-    marginRight: 24,
-  },
-  description: {
-    fontSize: 18,
-    color: "#666666",
-    marginRight: 16,
-  },
-});

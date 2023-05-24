@@ -9,7 +9,6 @@ import DetailScreen from "./src/screens/DetailScreen";
 import CreateScreen from "./src/screens/CreateScreen";
 import EditScreen from "./src/screens/EditScreen";
 
-// import { Provider } from "./src/context/BlogContext";
 import { EvilIcons } from "@expo/vector-icons";
 
 import store from './src/redux/store/index'

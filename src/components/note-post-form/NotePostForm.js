@@ -35,7 +35,7 @@ const NotePostForm = ({ onSubmit, initialValues }) => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: initialValues.backgroundColor, justifyContent: 'space-between'}}>
+    <View style={{ flex: 1, backgroundColor: selectedItem ? selectedItem : initialValues.backgroundColor, justifyContent: 'space-between'}}>
       <View style={styles.containerTop}>
         <TextInput
           placeholder="Title"

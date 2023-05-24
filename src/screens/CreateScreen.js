@@ -1,15 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
-import { Context as BlogContext } from "../context/BlogContext";
 import NotePostForm from "../components/note-post-form/NotePostForm";
 
+import { useDispatch } from "react-redux";
+import { addNote } from "../redux/features/note/noteSlice";
+
 const CreateScreen = ({ navigation }) => {
-  const { addNote } = useContext(BlogContext);
+  const dispatch = useDispatch();
 
   return (
     <NotePostForm
       onSubmit={(title, content, backgroundColor) => {
-        addNote(title, content, backgroundColor,() => navigation.navigate("Index"));
+        dispatch(addNote(title, content, backgroundColor, () => navigation.navigate("Index")));
       }}
     />
   );

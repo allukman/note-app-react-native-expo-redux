@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Context as BlogContext } from "../context/BlogContext";
 import { useFonts } from "expo-font";
+import { useSelector } from "react-redux";
 
 const DetailScreen = ({ route }) => {
-  const { state } = useContext(BlogContext);
+  const notes = useSelector((state) => state.note)
 
   const [fontsLoaded] = useFonts({
     'Nunito-Regular': require('../../assets/fonts/Nunito-Regular.ttf'),
@@ -16,7 +16,7 @@ const DetailScreen = ({ route }) => {
   }
 
   const id = route.params.id;
-  const note = state.find((note) => note.id === id);
+  const note = notes.find((note) => note.id === id);
 
   return (
     <View style={{ flex: 1, backgroundColor: note.backgroundColor }}>
