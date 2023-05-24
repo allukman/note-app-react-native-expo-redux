@@ -20,7 +20,7 @@ $ npm install
 
 - NGROK
 
-Create new folder for ngrok server
+Create new project for ngrok server
 
 ```
 $ mkdir note-app-json-server
@@ -50,20 +50,36 @@ ngrok http PORT_NUMBER
 
 ```
 // For IOS
-react-native run-ios
+expo start --ios
 
 // For Android
-react-native run-android
+expo start --android
 ```
 
 - NGROK
 
+Create new file
 ```
-npm json-server -w db.json
+db.json
+
+{
+  "notes": [
+    {
+      "title": "This is title",
+      "content": "lorem ipsum dolor sit amet",
+      "backgroundColor": "lightgreen",
+      "id": 1
+    },
+  ]
+}
+```
+
+```
+$ npm json-server -w db.json
 ```
 
 open new terminal
 
 ```
-npm ngrok http 3000
+$ npm ngrok http 3000
 ```
